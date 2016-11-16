@@ -1,0 +1,65 @@
+buildscript {
+    repositories {
+    	mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+sourceCompatibility = 1.8
+group = 'com.apptium'
+version = '2.0.0'
+
+install {
+    repositories.mavenInstaller {
+        pom.artifactId = 'resourcemanagementconnector' 
+        pom.packaging = 'jar'
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+	mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+    compile("org.springframework.boot:spring-boot-gradle-plugin:1.2.1.RELEASE")
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+    compile("org.springframework.boot:spring-boot-starter-actuator:1.2.5.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-web:1.2.5.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:1.2.1.RELEASE")
+    compile("org.springframework:spring-jdbc:4.1.5.RELEASE")
+    compile("org.springframework:spring-test:4.1.5.RELEASE")
+    compile("com.sun.jersey.contribs:jersey-apache-client:1.10")
+    compile("org.springframework.boot:spring-boot-starter-web")
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
+
